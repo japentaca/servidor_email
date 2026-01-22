@@ -1,0 +1,29 @@
+{
+  "name": "servidor-email",
+  "version": "1.0.0",
+  "description": "Servidor SMTP y POP3 simple para testing",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node --test --test-concurrency=1",
+    "test:watch": "node --test --watch --test-concurrency=1"
+  },
+  "keywords": [
+    "smtp",
+    "pop3",
+    "email",
+    "testing"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "smtp-server": "^3.13.0",
+    "mailparser": "^3.6.5",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemailer": "^6.9.7",
+    "node-pop3": "^0.9.0"
+  }
+}
