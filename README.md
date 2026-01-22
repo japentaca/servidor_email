@@ -61,4 +61,6 @@ const transporter = nodemailer.createTransport({
 Cualquier cliente POP3 puede conectarse a `localhost:1110`. Acepta cualquier usuario y contraseña.
 
 ---
-Proyecto creado para el curso de Arquitectura de Grandes Clientes (AGC) - LITAT.
+
+Este proyecto es de licencia MIT y fue creado por **Javier Ntaca**, director del LITAT.
+
