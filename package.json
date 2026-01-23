@@ -18,12 +18,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "smtp-server": "^3.13.0",
-    "mailparser": "^3.6.5",
-    "dotenv": "^16.3.1"
+    "smtp-server": "^3.18.0",
+    "mailparser": "^3.9.1",
+    "dotenv": "^17.2.3"
   },
   "devDependencies": {
-    "nodemailer": "^6.9.7",
-    "node-pop3": "^0.9.0"
+    "nodemailer": "^7.0.12",
+    "node-pop3": "^0.11.0"
   }
 }
