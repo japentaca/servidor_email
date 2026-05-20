@@ -16,7 +16,7 @@ after((done) => {
 });
 
 test('SMTP server should receive and store emails', async () => {
-  emailStorage.clear();
+  await emailStorage.clear();
 
   const transporter = nodemailer.createTransport({
     host: 'localhost',
@@ -44,11 +44,16 @@ test('SMTP server should receive and store emails', async () => {
   // Wait a bit for async parsing
   await new Promise(resolve => setTimeout(resolve, 500));
 
-  const emails = emailStorage.list();
+  const emails = await emailStorage.list();
   assert.strictEqual(emails.length, 1);
   assert.strictEqual(emails[0].from, 'sender@example.com');
   assert.deepStrictEqual(emails[0].to, ['receiver@example.com']);
   assert.strictEqual(emails[0].subject, 'Test SMTP');
   assert.strictEqual(emails[0].text, 'Hello world');
   assert.strictEqual(emails[0].html, '<b>Hello world</b>');
+
+  const receiverMailbox = await emailStorage.list('receiver@example.com');
+  const otherMailbox = await emailStorage.list('other@example.com');
+  assert.strictEqual(receiverMailbox.length, 1);
+  assert.strictEqual(otherMailbox.length, 0);
 });

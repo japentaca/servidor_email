@@ -1,13 +1,13 @@
 # Servidor de Email para Testing (SMTP & POP3)
 
-Servidor de email ligero en Node.js diseñado para testing de aplicaciones. Permite recibir correos vía SMTP y consultarlos vía POP3 o inspeccionando el almacenamiento en memoria.
+Servidor de email ligero en Node.js diseñado para testing de aplicaciones. Permite recibir correos vía SMTP y consultarlos vía POP3 usando persistencia en SQLite.
 
 ## Características
 
 - **Servidor SMTP**: Recibe correos en el puerto 2525 (configurable).
 - **Servidor POP3**: Acceso a correos recibidos en el puerto 1110 (configurable).
-- **Almacenamiento FIFO**: Mantiene los últimos 100 mensajes en memoria.
-- **Sin dependencias de DB**: Todo se guarda en memoria para máxima velocidad en tests.
+- **Persistencia SQLite + Knex**: Guarda correos en `data/emails.sqlite3`.
+- **Almacenamiento FIFO**: Mantiene los últimos 100 mensajes persistidos.
 - **Logging detallado**: Seguimiento de cada comando y evento en la consola.
 
 ## Requisitos
@@ -28,6 +28,8 @@ Crea un archivo `.env` (basado en `.env.example`) para cambiar los puertos por d
 SMTP_PORT=2525
 POP3_PORT=1110
 ```
+
+La base de datos SQLite se crea automáticamente en `data/emails.sqlite3`.
 
 ## Ejecución
 

@@ -18,9 +18,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "knex": "^3.1.0",
     "smtp-server": "^3.18.0",
     "mailparser": "^3.9.1",
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "nodemailer": "^7.0.12",

@@ -22,7 +22,7 @@ after((done) => {
 });
 
 test('Integration: Sent email via SMTP should be retrievable via POP3', async () => {
-  emailStorage.clear();
+  await emailStorage.clear();
 
   // 1. Send email via SMTP
   const transporter = nodemailer.createTransport({
@@ -54,7 +54,7 @@ test('Integration: Sent email via SMTP should be retrievable via POP3', async ()
   const client = new POP3Client({
     host: 'localhost',
     port: POP3_PORT,
-    user: 'testuser',
+    user: 'integration-receiver@example.com',
     password: 'testpassword',
   });
 
@@ -67,4 +67,15 @@ test('Integration: Sent email via SMTP should be retrievable via POP3', async ()
   assert.ok(rawEmail.includes('From: integration-sender@example.com'), 'Raw email should contain the sender');
 
   await client.QUIT();
+
+  const otherClient = new POP3Client({
+    host: 'localhost',
+    port: POP3_PORT,
+    user: 'other-user@example.com',
+    password: 'testpassword',
+  });
+
+  const otherList = await otherClient.LIST();
+  assert.strictEqual(otherList.length, 0, 'Other mailbox should not see this email');
+  await otherClient.QUIT();
 });

@@ -30,7 +30,7 @@ const server = new SMTPServer({
           raw: raw.toString(),
         };
 
-        emailStorage.add(emailData);
+        await emailStorage.add(emailData);
         log(`Email received from ${emailData.from} to ${emailData.to.join(', ')}`);
         callback();
       } catch (err) {

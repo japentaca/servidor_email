@@ -27,7 +27,7 @@ class Pop3Session {
     this.socket.write(`${message}\r\n`);
   }
 
-  handleCommand(line) {
+  async handleCommand(line) {
     const [command, ...args] = line.trim().split(' ');
     const cmd = command.toUpperCase();
     log(`Command: ${cmd} ${args.join(' ')}`);
@@ -38,8 +38,9 @@ class Pop3Session {
         this.send('+OK User accepted');
         break;
       case 'PASS':
+        if (!this.user) return this.send('-ERR Must send USER first');
         this.state = STATES.TRANSACTION;
-        this.emails = emailStorage.list();
+        this.emails = await emailStorage.list(this.user);
         this.send('+OK Welcome');
         break;
       case 'STAT':
@@ -91,7 +92,9 @@ class Pop3Session {
       case 'QUIT':
         if (this.state === STATES.TRANSACTION) {
           this.state = STATES.UPDATE;
-          this.deletedIds.forEach(id => emailStorage.delete(id));
+          for (const id of this.deletedIds) {
+            await emailStorage.delete(id);
+          }
         }
         this.send('+OK Goodbye');
         this.socket.end();
@@ -119,7 +122,10 @@ const server = net.createServer((socket) => {
     while (buffer.includes('\r\n')) {
       const line = buffer.substring(0, buffer.indexOf('\r\n'));
       buffer = buffer.substring(buffer.indexOf('\r\n') + 2);
-      session.handleCommand(line);
+      session.handleCommand(line).catch((err) => {
+        log(`Command handling error: ${err.message}`);
+        session.send('-ERR Internal server error');
+      });
     }
   });
 
