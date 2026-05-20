@@ -18,14 +18,14 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "knex": "^3.1.0",
-    "smtp-server": "^3.18.0",
-    "mailparser": "^3.9.1",
     "dotenv": "^17.2.3",
-    "sqlite3": "^5.1.7"
+    "knex": "^3.1.0",
+    "mailparser": "^3.9.1",
+    "smtp-server": "^3.18.0",
+    "sqlite3": "^6.0.1"
   },
   "devDependencies": {
-    "nodemailer": "^7.0.12",
-    "node-pop3": "^0.11.0"
+    "node-pop3": "^0.11.0",
+    "nodemailer": "^8.0.7"
   }
 }
