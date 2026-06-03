@@ -14,7 +14,7 @@ class EmailStorage {
     const dbPath = path.join(dataDir, 'emails.sqlite3');
 
     this.db = knex({
-      client: 'sqlite3',
+      client: 'better-sqlite3',
       connection: {
         filename: dbPath,
       },
