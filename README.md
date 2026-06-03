@@ -62,6 +62,20 @@ const transporter = nodemailer.createTransport({
 
 Cualquier cliente POP3 puede conectarse a `localhost:1110`. Acepta cualquier usuario y contraseña.
 
+### Script para leer todos los correos
+
+Puedes listar y mostrar el contenido completo de todos los correos de un servidor POP3 con:
+
+```bash
+npm run read:emails -- 127.0.0.1:1110
+```
+
+Tambien soporta IPv6 entre corchetes:
+
+```bash
+npm run read:emails -- [::1]:1110
+```
+
 ---
 
 Este proyecto es de licencia MIT y fue creado por **Javier Ntaca**, director del LITAT.

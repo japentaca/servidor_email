@@ -6,6 +6,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "read:emails": "node scripts/read-emails.js",
+    "clean_db": "node scripts/clean-db.js",
     "test": "node --test --test-concurrency=1",
     "test:watch": "node --test --watch --test-concurrency=1"
   },
